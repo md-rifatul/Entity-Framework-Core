@@ -58,6 +58,37 @@ namespace DbOperationsWithEfCoreApp.Controllers
             return Ok(result);
         }
 
+
+        [HttpPost("allWithAnonimous")]
+        public async Task<IActionResult> GetAllWithNonAnonimous()
+        {
+            var ids = new List<int> { 1, 4, 3 };
+            var result = await _appDbContext.Currencies
+                .Where(x => ids.Contains(x.Id))
+                .Select(x => new
+                {
+                    x.Id,
+                    x.Title
+                })
+                .ToListAsync();
+            return Ok(result);
+        }
+
+        [HttpPost("allWithNonAnonimous")]
+        public async Task<IActionResult> GetAllWithAnonimous()
+        {
+            var ids = new List<int> { 1, 4, 3 };
+            var result = await _appDbContext.Currencies
+                .Where(x => ids.Contains(x.Id))
+                .Select(x => new Currency()
+                {
+                    Id = x.Id,
+                    Title = x.Title
+                })
+                .ToListAsync();
+            return Ok(result);
+        }
+
     }
 
 
