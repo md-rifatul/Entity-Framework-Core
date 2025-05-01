@@ -2,13 +2,8 @@
 
 namespace DbOperationsWithEfCoreApp.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        {
-
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Currency>().HasData(
@@ -19,11 +14,11 @@ namespace DbOperationsWithEfCoreApp.Data
                 );
 
             modelBuilder.Entity<Language>().HasData(
-    new Language() { Id = 1, Title = "Bangla", Description = "Bangla" },
-    new Language() { Id = 2, Title = "English", Description = "English" },
-    new Language() { Id = 3, Title = "Chinis", Description = "Chinis" },
-    new Language() { Id = 4, Title = "Turky", Description = "Turky" }
-    );
+            new Language() { Id = 1, Title = "Bangla", Description = "Bangla" },
+            new Language() { Id = 2, Title = "English", Description = "English" },
+            new Language() { Id = 3, Title = "Chinis", Description = "Chinis" },
+            new Language() { Id = 4, Title = "Turky", Description = "Turky" }
+            );
         }
 
         public DbSet<Book> Books { get; set; }
