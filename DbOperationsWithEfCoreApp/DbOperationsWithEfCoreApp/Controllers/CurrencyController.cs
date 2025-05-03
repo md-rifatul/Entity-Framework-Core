@@ -22,7 +22,7 @@ namespace DbOperationsWithEfCoreApp.Controllers
         {
             //var result = _appDbContext.Currencies.ToList();
             var result = (from currencies in _appDbContext.Currencies
-                          select currencies).ToList();
+                          select currencies).AsNoTracking().ToList();
 
             return Ok(result);
         }
@@ -32,7 +32,7 @@ namespace DbOperationsWithEfCoreApp.Controllers
         {
             //var result = await _appDbContext.Languages.ToListAsync();
             var result = await (from languages in _appDbContext.Languages
-                                select languages).ToListAsync();
+                                select languages).AsNoTracking().ToListAsync();
             return Ok(result);
         }
 
